@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
 class EmailVerification extends StatefulWidget {
   const EmailVerification({Key? key}) : super(key: key);
 
@@ -12,16 +13,17 @@ class _EmailVerificationState extends State<EmailVerification> {
   Widget build(BuildContext context) {
     // return
     return Scaffold(
-      appBar: AppBar(title: const Text('Email verify')),
-        body:
-        Column(
-          children:  [const Text('Send verification mail by clicking button below'),
-            TextButton(onPressed: () async{
-           final user =  FirebaseAuth.instance.currentUser;
-           await user?.sendEmailVerification();
-          },
-              child: const Text('Click Here'))],
-        )
-    );
+        appBar: AppBar(title: const Text('Email verify')),
+        body:Column(
+          children: [
+            const Text('Send verification mail by clicking button below'),
+            TextButton(
+                onPressed: () async {
+                  final user = FirebaseAuth.instance.currentUser;
+                  await user?.sendEmailVerification();
+                },
+                child: const Text('Click Here'))
+          ],
+        ));
   }
 }
