@@ -1,9 +1,7 @@
 // import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:untitled1/firebase_options.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:untitled1/Views/error_file.dart';
 import 'package:untitled1/services/auth/auth_exceptions.dart';
 import 'package:untitled1/services/auth/auth_services.dart';
@@ -92,13 +90,13 @@ class _LoginViewState extends State<LoginView> {
                     await AuthServices.firebase().sendEmailVerification();
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).pushNamed('/email_verify/');                }
-                } on UserNotFoundAuthException catch (e) {
+                } on UserNotFoundAuthException catch (_) {
                   showErrorDialog(context, 'User Not Found.');
-                }on WrongPasswordAuthException catch (e) {
+                }on WrongPasswordAuthException catch (_) {
                   showErrorDialog(context, 'Wrong Password.');
-                }on InvalidEmailAuthException catch (e) {
+                }on InvalidEmailAuthException catch (_) {
                   showErrorDialog(context, 'Invalid Email');
-                }on GenericAuthException catch (e) {
+                }on GenericAuthException catch (_) {
                   showErrorDialog(context, 'Authentication Error.');
                 }
 
