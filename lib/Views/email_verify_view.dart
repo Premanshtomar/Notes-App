@@ -1,5 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:untitled1/Views/error_file.dart';
+import 'package:untitled1/services/auth/auth_services.dart';
 
 class EmailVerification extends StatefulWidget {
   const EmailVerification({Key? key}) : super(key: key);
@@ -16,13 +18,22 @@ class _EmailVerificationState extends State<EmailVerification> {
         appBar: AppBar(title: const Text('Email verify')),
         body:Column(
           children: [
-            const Text('Send verification mail by clicking button below'),
+            const Text("we've sent you a verification mail Please check your mail!! "),
             TextButton(
                 onPressed: () async {
-                  final user = FirebaseAuth.instance.currentUser;
-                  await user?.sendEmailVerification();
+                  await AuthServices.firebase().sendEmailVerification();
                 },
-                child: const Text('Click Here'))
+                child: const Text('Click Here')),
+            const Text("If you didn't received verification email."
+                "Click button above to Send verification mail again"),
+
+            const Text("Once you verify your email click button bellow to login!"),
+            TextButton(onPressed: () async{
+                await AuthServices.firebase().logOut();
+                // ignore: use_build_context_synchronously
+                Navigator.of(context).pushNamedAndRemoveUntil('/login/', (route) => false);
+            },
+                child: const Text('Login'))
           ],
         ));
   }
