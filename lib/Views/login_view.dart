@@ -92,13 +92,13 @@ class _LoginViewState extends State<LoginView> {
                     await AuthServices.firebase().sendEmailVerification();
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).pushNamed('/email_verify/');                }
-                } on UserNotFoundAuthException catch (e) {
+                } on UserNotFoundAuthException catch (_) {
                   showErrorDialog(context, 'User Not Found.');
-                }on WrongPasswordAuthException catch (e) {
+                }on WrongPasswordAuthException catch (_) {
                   showErrorDialog(context, 'Wrong Password.');
-                }on InvalidEmailAuthException catch (e) {
+                }on InvalidEmailAuthException catch (_) {
                   showErrorDialog(context, 'Invalid Email');
-                }on GenericAuthException catch (e) {
+                }on GenericAuthException catch (_) {
                   showErrorDialog(context, 'Authentication Error.');
                 }
 
