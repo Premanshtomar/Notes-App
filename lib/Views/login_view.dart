@@ -47,7 +47,7 @@ class _LoginViewState extends State<LoginView> {
           children: [
             SingleChildScrollView(
               child: Container(
-                padding:const EdgeInsets.only(top: 210, left: 40) ,
+                margin:EdgeInsets.only(top: MediaQuery.of(context).size.height*0.19, left: MediaQuery.of(context).size.width*0.09),
                 child: const Text('Welcome\n User...',
                   style: TextStyle(
                       color: Colors.white,
@@ -58,119 +58,121 @@ class _LoginViewState extends State<LoginView> {
             ),
             Container(
               padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/2,right: 35,left: 35),
-              child:Column(
-                children:[
-                  TextField(
-                    controller: _email,
-                    keyboardType: TextInputType.emailAddress,
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    decoration: InputDecoration(hintText: "example@xyz.com",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
+              child:SingleChildScrollView(
+                child: Column(
+                  children:[
+                    TextField(
+                      controller: _email,
+                      keyboardType: TextInputType.emailAddress,
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      decoration: InputDecoration(hintText: "example@xyz.com",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
 
-                        ),
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
-                        label: const Text("Email")
-                    ),
-
-                  ),
-                  const SizedBox(height: 20,
-                  ),
-
-                  TextField(
-                    controller: _password,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    decoration: InputDecoration(hintText: 'Enter your Password',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15)
-                        ),
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
-                        label: const Text('Password')),
-                  ),
-                  const SizedBox(height: 35,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [const Text('Sign in',
-                      style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                        color: Color(0xff4c505b)
-                    ),
-                    ),
-                    CircleAvatar(
-                      radius: 35,
-                      backgroundColor: const Color(0xff4c505b),
-                      child: IconButton(
-                        color: Colors.white,
-                          onPressed: ()
-                            async {
-                              final email = _email.text.trim();
-                              final password = _password.text;
-                              // UserCredential? firebaseUser;
-                              try {
-                                await AuthServices.firebase().logIn(
-                                    email: email, password: password);
-                                if (AuthServices.firebase().currentUser?.isEmailVerified??false){
-                                  // ignore: use_build_context_synchronously
-                                  Navigator.of(context).pushNamedAndRemoveUntil('/notes/', (route) => false);
-                                }else{
-                                  // ignore: use_build_context_synchronously
-                                  await AuthServices.firebase().sendEmailVerification();
-                                  // ignore: use_build_context_synchronously
-                                  Navigator.of(context).pushNamed('/email_verify/');                }
-                              } on UserNotFoundAuthException catch (_) {
-                                showErrorDialog(context, 'User Not Found.');
-                              }on WrongPasswordAuthException catch (_) {
-                                showErrorDialog(context, 'Wrong Password.');
-                              }on InvalidEmailAuthException catch (_) {
-                                showErrorDialog(context, 'Invalid Email');
-                              }on GenericAuthException catch (_) {
-                                showErrorDialog(context, 'Authentication Error.');
-                              }
-                            },
-                          icon: const Icon(Icons.arrow_forward)
+                          ),
+                          fillColor: Colors.grey.shade300,
+                          filled: true,
+                          label: const Text("Email")
                       ),
+
                     ),
-                    ],
-                  ),
-                  const SizedBox(height:100
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(onPressed: () {
-                        Navigator.of(context)
-                            .pushNamedAndRemoveUntil('/register/', (route) => false);
-                      },
-                          child:const Text('Sign up',
-                            style: TextStyle(
+                    const SizedBox(height: 20,
+                    ),
+
+                    TextField(
+                      controller: _password,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      decoration: InputDecoration(hintText: 'Enter your Password',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          fillColor: Colors.grey.shade300,
+                          filled: true,
+                          label: const Text('Password')),
+                    ),
+                    const SizedBox(height: 35,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [const Text('Sign in',
+                        style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                          color: Color(0xff4c505b)
+                      ),
+                      ),
+                      CircleAvatar(
+                        radius: 35,
+                        backgroundColor: const Color(0xff4c505b),
+                        child: IconButton(
+                          color: Colors.white,
+                            onPressed: ()
+                              async {
+                                final email = _email.text.trim();
+                                final password = _password.text;
+                                // UserCredential? firebaseUser;
+                                try {
+                                  await AuthServices.firebase().logIn(
+                                      email: email, password: password);
+                                  if (AuthServices.firebase().currentUser?.isEmailVerified??false){
+                                    // ignore: use_build_context_synchronously
+                                    Navigator.of(context).pushNamedAndRemoveUntil('/notes/', (route) => false);
+                                  }else{
+                                    // ignore: use_build_context_synchronously
+                                    await AuthServices.firebase().sendEmailVerification();
+                                    // ignore: use_build_context_synchronously
+                                    Navigator.of(context).pushNamed('/email_verify/');                }
+                                } on UserNotFoundAuthException catch (_) {
+                                  showErrorDialog(context, 'User Not Found.');
+                                }on WrongPasswordAuthException catch (_) {
+                                  showErrorDialog(context, 'Wrong Password.');
+                                }on InvalidEmailAuthException catch (_) {
+                                  showErrorDialog(context, 'Invalid Email');
+                                }on GenericAuthException catch (_) {
+                                  showErrorDialog(context, 'Authentication Error.');
+                                }
+                              },
+                            icon: const Icon(Icons.arrow_forward)
+                        ),
+                      ),
+                      ],
+                    ),
+                    const SizedBox(height:100
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed('/register/');
+                        },
+                            child:const Text('Sign up',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                                color: Color(0xff4c505b)
+                              ),
+                            ),
+                        ),
+                        TextButton(onPressed: (){
+
+                        },
+                          child:const Text('Forget Password',
+                          style: TextStyle(
                               decoration: TextDecoration.underline,
                               fontWeight: FontWeight.w700,
                               fontSize: 20,
                               color: Color(0xff4c505b)
-                            ),
                           ),
-                      ),
-                      TextButton(onPressed: (){
-
-                      },
-                        child:const Text('Forget Password',
-                        style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                            color: Color(0xff4c505b)
                         ),
-                      ),
-                      ),
-                    ],
-                  )
-                ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               )
             ),
           ],
