@@ -165,25 +165,28 @@ class _RegisterViewState extends State<RegisterView> {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/login/', (route) => false);
-                      },
-                      child: const Text("Sign In",
-                          style: TextStyle(
-                              fontSize: 40,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              decoration: TextDecoration.underline)),
-                    )
+                    // const SizedBox(
+                    //   height: 100,
+                    // ),
                   ],
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.70,left: MediaQuery.of(context).size.width*0.05),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/login/', (route) => false);
+                },
+                child: const Text("Sign In",
+                    style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        decoration: TextDecoration.underline)),
+              ),
+            )
           ],
         ),
       ),

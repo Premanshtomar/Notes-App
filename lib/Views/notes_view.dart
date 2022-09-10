@@ -28,30 +28,6 @@ class _NotesState extends State<Notes> {
             side: BorderSide(
                 width: 4.0, color: Colors.lightBlue, style: BorderStyle.solid)),
         actions: [
-          // PopupMenuButton(
-          //   itemBuilder: (context) {
-          //     return const [
-          //       PopupMenuItem<MenuAction>(
-          //         value: MenuAction.logout,
-          //         child: Text('Log Out'),
-          //       )
-          //     ];
-          //   },
-          //   onSelected: (value) async {
-          //     switch (value) {
-          //       case MenuAction.logout:
-          //         final shouldLogout = await showLogOutDialog(context);
-          //         if (shouldLogout) {
-          //           await FirebaseAuth.instance.signOut();
-          //           // ignore: use_build_context_synchronously
-          //           Navigator.of(context)
-          //               .pushNamedAndRemoveUntil("/login/", (_) => false);
-          //         } else {
-          //           return;
-          //         }
-          //     }
-          //   },
-          // )]
           PopupMenuButton(itemBuilder: (context){
             return [const PopupMenuItem(
               value: MenuAction.logout,
@@ -75,30 +51,6 @@ class _NotesState extends State<Notes> {
     );
   }
 }
-
-// Future<bool> showLogOutDialog(BuildContext context) {
-//   return showDialog(
-//       context: context,
-//       builder: (context) {
-//         return AlertDialog(
-//           title: const Text('Logout?'),
-//           content: const Text('You want to logout?'),
-//           actions: [
-//             TextButton(
-//                 onPressed: () {
-//                   Navigator.of(context).pop(false);
-//                 },
-//                 child: const Text('Cancel')),
-//             TextButton(
-//                 onPressed: () {
-//                   Navigator.of(context).pop(true);
-//                 },
-//                 child: const Text('Logout'))
-//           ],
-//         );
-//       }).then((value) => value ?? false);
-// }
-
 Future<bool> showLogOutDialog(BuildContext context){
   return showDialog(context: context, builder: (context){
     return AlertDialog(
