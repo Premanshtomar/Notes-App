@@ -3,7 +3,7 @@
 // import 'package:untitled1/firebase_options.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled1/Views/error_file.dart';
+import 'package:untitled1/Views/show_dialogs.dart';
 import 'package:untitled1/services/auth/auth_exceptions.dart';
 import 'package:untitled1/services/auth/auth_services.dart';
 

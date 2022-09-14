@@ -2,6 +2,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled1/Views/show_dialogs.dart';
 
 import 'package:untitled1/enum/menu_action.dart';
 import 'package:untitled1/services/auth/auth_services.dart';
@@ -50,23 +51,4 @@ class _NotesState extends State<Notes> {
       ),
     );
   }
-}
-Future<bool> showLogOutDialog(BuildContext context){
-  return showDialog(context: context, builder: (context){
-    return AlertDialog(
-      title: const Text('Logout?'),
-      content: const Text("Sure you want to Logout?"),
-      actions: [
-        TextButton(onPressed: () {
-          Navigator.of(context).pop(false);
-        },
-            child: const Text('Cancel')),
-        TextButton(onPressed: () {
-          Navigator.of(context).pop(true);
-        },
-            child: const Text('Logout'))
-
-      ],
-    );
-  }).then((value) => value ?? false);
 }
