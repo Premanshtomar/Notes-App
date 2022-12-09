@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:untitled1/Views/email_verify_view.dart';
 import 'package:untitled1/Views/login_view.dart';
 import 'package:untitled1/Views/notes_view.dart';
@@ -7,6 +8,13 @@ import 'package:untitled1/services/auth/auth_services.dart';
 
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light
+    )
+  );
   WidgetsFlutterBinding.ensureInitialized();
   // Firebase.initializeApp();
   runApp(const MyApp());
@@ -18,6 +26,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData().copyWith(
+        appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
+      ),
+      // themeMode: ThemeMode.dark,
+      // darkTheme:ThemeData(brightness: Brightness.dark),
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       routes: {
@@ -36,11 +49,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-        // return Scaffold(
-        //   appBar: AppBar(
-        //     title: const Text("Home Page"),
-        //   ),
-        //   body:
         FutureBuilder(
       future: AuthServices.firebase().initialize(),
       builder: (context, snapshot) {
@@ -54,17 +62,14 @@ class HomePage extends StatelessWidget {
                 return const EmailVerification();
               }
             } else {
-              return const LoginView();
+              return const Notes();
             }
-          // if (user?.emailVerified ?? false){
-          //   return const Text('Email verified');
-          // }else{
-          //   // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const EmailVerification()));
-          //   return const EmailVerification();
-          // }
-          // return const LoginView();
           default:
-            return const CircularProgressIndicator();
+            Future.delayed(const Duration(seconds: 2)
+            );
+
+            return const Center(
+                child: CircularProgressIndicator());
         }
       },
     );
